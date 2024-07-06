@@ -3,23 +3,28 @@
 #include<algorithm>
 using namespace std;
 
-int main(){
-    vector<vector<int>> v={
-        {1,3},
-        {2,6},
-        {1,5}
-    };
-    int x=5;
-    vector<int> q={10,11};
-    for(int i=0; i<v.size(); i++){
-        reverse(v[i].begin(),v[i].end());
-    }
-    sort(v.begin(),v.end());
-    cout<<endl;
-    for(int i=0; i<v.size(); i++){
-        for(int j=0; j<v[i].size(); j++){
-            cout<<v[i][j]<<" ";
+long long maximumPoints(vector<int>& enemyEnergies, int currentEnergy) {
+        int n=enemyEnergies.size();
+        sort(enemyEnergies.begin(),enemyEnergies.end());
+        if(currentEnergy<enemyEnergies[0]) return 0;
+        int i=0;
+        int j=n-1;
+        long long point=0;
+        while(i<=j){
+            if(currentEnergy>=enemyEnergies[i]){
+                currentEnergy -=enemyEnergies[i];
+                point++;
+            }
+            else{
+                currentEnergy += enemyEnergies[j];
+                j--;
+            }
         }
-        cout<<endl;
+        return point;
     }
+
+int main(){
+    vector<int> enemyEnergies={3,2,2};
+    int currentEnergy=2;
+    cout<<maximumPoints(enemyEnergies,currentEnergy);
 }

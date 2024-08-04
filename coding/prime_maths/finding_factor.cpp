@@ -12,12 +12,12 @@ int main(){
     
     // met->2  O(sqrt(n))
     int j;
-    for(j=1; j<sqrt(n); j++){
+    for(j=2; j<sqrt(n); j++){
         if(n%j==0){
             cout<<j<<" ";
         }
     }
-    for(j=sqrt(n); j>=1; j--){
+    for(j=sqrt(n); j>1; j--){
         if(n%j==0){
             cout<<n/j<<" ";
         }

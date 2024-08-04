@@ -26,7 +26,7 @@ int main(){
                 break;
             }
         }
-        if(flag==false) cout<<"-1";
+        if(flag==false) cout<<"-1"; //
 
     }
     else cout<<"-1";

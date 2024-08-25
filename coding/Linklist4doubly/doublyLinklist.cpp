@@ -21,7 +21,7 @@ class DLL{
 
     void addAtBegn(int val){
         Node *temp=new Node(val);
-        if(s==0){
+        if(size==0){
             head=tail=temp;
         }
         else{
@@ -45,7 +45,7 @@ class DLL{
 
     void addAtIdx(int val,int idx){
         if(idx==0) addAtBegn(val);
-        else if(idx==size) addAtend(val);
+        else if(idx==size+1) addAtend(val);
         else{
             Node *temp=new Node(val);
             Node *tr=head;
@@ -58,8 +58,68 @@ class DLL{
         }
         size++;
     }
-}
+
+    void delatbeg(){
+        if(size==0) cout<<"List is empty"<<endl;
+        else{
+            head=head->next;
+            head->prev=NULL;
+        }
+        size--;
+    }
+    
+    void delatend(){
+        if(size==0) cout<<"List is empty"<<endl;
+        else{
+            tail=tail->prev;
+            tail->next=NULL;
+        }
+        size--;
+    }
+
+    void delatidx(int idx){
+        if(idx<0 || idx>size) cout<<"Invalid idx"<<endl;
+        else{
+            if(idx==0) delatbeg();
+            else if(idx==size-1) delatend();
+            else{
+                Node *tr=head;
+                while(idx-1!=0){
+                    tr=tr->next;
+                }
+                tr->next=tr->next->next;
+                tr->next->prev=tr;
+            }
+        }
+        size--;
+    }
+    void display(){
+        Node *tr=head;
+        while(tr!=NULL){
+            cout<<tr->val<<" ";
+            tr=tr->next;
+        }
+        cout<<endl;
+    }
+};
 
 int main(){
+    DLL dll;
 
+    dll.addAtBegn(15);
+    dll.display();
+    dll.addAtBegn(18);
+    dll.display();
+    cout<<dll.head->next->prev->val<<endl;
+    dll.addAtend(78);
+    dll.display();
+    dll.addAtIdx(45,4);
+    dll.display();
+    dll.delatbeg();
+    dll.display();
+    // dll.delatend();
+    // dll.display();
+    dll.delatidx(1);
+    dll.display();
+    cout<<dll.head->next->prev->val<<endl;
 }

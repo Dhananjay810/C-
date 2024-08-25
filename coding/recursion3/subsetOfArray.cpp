@@ -12,7 +12,7 @@ void store(int arr[],int n, int idx, vector<int> v, vector<vector<int>>& s){
     store(arr,n,idx+1,v,s);
 }
 int main(){
-    int arr[]={1,3,4};
+    int arr[]={1,0,1,0};
     vector<int>v;
     int n=sizeof(arr)/sizeof(arr[0]);
     vector<vector<int>> s;

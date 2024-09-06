@@ -1,0 +1,66 @@
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+int prio(char ch){
+    if(ch=='+' || ch=='-') return 1;
+    else if(ch==')') return 0;
+    return 2;
+}
+int sol(int val1, int val2, char ch){ // val1 op val2 concept
+    if(ch=='+') return val1+val2;
+    else if(ch=='-') return val1-val2;
+    else if(ch=='*') return val1*val2;
+    return val1/val2;
+}
+int main(){
+    string s="(7+9)*4/8-3";
+    stack<int> val;
+    stack<char> op;
+    int n=s.size();
+    for(int i=0; i<n; i++){
+        if(s[i]>=48 && s[i]<=57){
+            val.push(s[i]-48);
+        }
+        else{
+            if(op.size()==0 || s[i]=='(' || op.top()=='(' || prio(s[i])>prio(op.top())) op.push(s[i]);
+            else if(s[i]==')'){
+                while(op.top()!='('){
+                    char ch=op.top();
+                    op.pop();
+                    int val2=val.top();
+                    val.pop();
+                    int val1=val.top();
+                    val.pop();
+                    int ans=sol(val1,val2,ch);
+                    val.push(ans);
+                }
+                op.pop();
+            }
+            else{
+                while(op.size()>0 && prio(s[i])<=prio(op.top())){
+                    char ch=op.top();
+                    op.pop();
+                    int val2=val.top();
+                    val.pop();
+                    int val1=val.top();
+                    val.pop();
+                    int ans=sol(val1,val2,ch);
+                    val.push(ans);
+                }
+                op.push(s[i]);
+            }
+        }
+    }
+    while(op.size()>0){
+        char ch=op.top();
+        op.pop();
+        int val2=val.top();
+        val.pop();
+        int val1=val.top();
+        val.pop();
+        int ans=sol(val1,val2,ch);
+        val.push(ans);
+    }
+    cout<<val.top();
+}

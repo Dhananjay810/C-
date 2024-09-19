@@ -13,7 +13,7 @@ int sol(int val1, int val2, char ch){ // val1 op val2 concept
     return val1/val2;
 }
 int main(){
-    string s="2+6*4/8-3";
+    string s="3+2*2";
     stack<int> val;
     stack<char> op;
     int n=s.size();

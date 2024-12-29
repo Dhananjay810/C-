@@ -25,7 +25,7 @@ void sub(string ans, string s, vector<string>& v,bool flag){
     }
 }
 int main(){
-    string s="google";
+    string s="dbca";
     vector<string> v;
     sub("",s,v,true);
     for(int i=0; i<v.size(); i++){

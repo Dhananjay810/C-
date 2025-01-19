@@ -3,6 +3,7 @@
 #include<algorithm>
 using namespace std;
 void store(int arr[],int n, int idx, vector<int> v, vector<vector<int>>& s){
+    if(v.size()>2) return;
     if(idx==n){
         s.push_back(v);
         return;
@@ -12,7 +13,7 @@ void store(int arr[],int n, int idx, vector<int> v, vector<vector<int>>& s){
     store(arr,n,idx+1,v,s);
 }
 int main(){
-    int arr[]={1,0,1,0};
+    int arr[]={1,2,3};
     vector<int>v;
     int n=sizeof(arr)/sizeof(arr[0]);
     vector<vector<int>> s;

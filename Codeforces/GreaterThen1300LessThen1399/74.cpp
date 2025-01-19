@@ -1,49 +1,49 @@
 #include<iostream>
 #include<vector>
-#include<algorithm>
 #include<climits>
+#include<algorithm>
 using namespace std;
+int f(int i, int j, vector<int>& v,vector<vector<int>>& dp){
+    int n=v.size();
+    if(i>j) return 0;
+
+    if(dp[i][j]!=-1) return dp[i][j];
+
+    int on=0,ze=0;
+
+    for(int a=i; a<=j; a++){
+        if(v[a]==1) on++;
+        else ze++;
+    }
+    int xx=ze-on;
+    // maxfi=max(maxfi,xx);
+
+    int maxfi1=f(i+1,j,v,dp);
+    int maxfi2=f(i,j-1,v,dp);
+
+    return dp[i][j]=max(xx,max(maxfi1,maxfi2));
+
+}
+
 int main(){
     int n;
     cin>>n;
-    int j=0;
-    vector<int> q(n);
     vector<int> v;
+    int one=0;
     for(int i=0; i<n; i++){
-        cin>>q[i];
-        if(q[i]==1){
-            v.push_back(j);
-            j=0;
-        }
-        else j++;
+        int num;
+        cin>>num;
+        v.push_back(num);
+        if(num==1) one++;
     }
-    v.push_back(j);
 
-    int idx=-1;
-    int mx=INT_MIN;
-    for(int i=0; i<v.size(); i++){
-        if(v[i]>mx){
-            mx=v[i];
-            idx=i;
-        }
+    if(one==n){
+        cout<<n-1;
+        return 0;
     }
-    int x=idx-1,y=idx+1;
-    while(x>=0){
-        if(v[x]==0){
-            mx++;
-            x--;
-        }
-        else break;
-    }
-    while(y<v.size()){
-        if(v[y]==0){
-            mx++;
-            y++;
-        }
-        else break;
-    }
-    //cout<<mx;
-    for(int i=0; i<v.size(); i++){
-        cout<<v[i]<<" ";
-    }
+
+    vector<vector<int>> dp(n+1, vector<int>(n+1,-1));
+
+    
+    cout<<one+f(0,n-1,v,dp);
 }

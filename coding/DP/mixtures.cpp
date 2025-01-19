@@ -3,6 +3,8 @@
 #include<climits>
 using namespace std;
 
+vector<vector<int>> dp(105,vector<int>(105,-1));
+
 int g(vector<int>& c, int i, int j){
     int res=0;
     for(int k=i; k<=j; k++){
@@ -13,12 +15,13 @@ int g(vector<int>& c, int i, int j){
 
 int f(int i, int j, vector<int>& colors){
     if(i==j) return 0;
-    int ans=INT_MAX;;
+    if(dp[i][j]!=-1) return dp[i][j];
+    int ans=INT_MAX;
 
     for(int k=i; k<j; k++){
         ans=min(ans,f(i,k,colors)+f(k+1,j,colors)+g(colors,i,k)*g(colors,k+1,j));
     }
-    return ans;
+    return dp[i][j]=ans;
 }
 
 int main(){

@@ -1,35 +1,33 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
+#include<iostream>
+#include<vector>
+#include<cmath>
 using namespace std;
 
-bool isPrime(int num) {
-    if (num <= 1) return false;
-    if (num <= 3) return true;
-    if (num % 2 == 0 || num % 3 == 0) return false;
-    for (int i = 5; i * i <= num; i += 6) {
-        if (num % i == 0 || num % (i + 2) == 0) return false;
-    }
+bool isPrime(int n){
+    if(n==1) return false;
+    for(int i=2; i<=sqrt(n); i++){
+        if(n%i==0){
+            return false;
+        }
+    } 
     return true;
 }
-bool hasExactlyThreeDivisors(int num) {
-    int root = sqrt(num);
-    if (root * root != num) return false;
-    return isPrime(root);
-}
 
-int main() {
-    int n;
-    cin >> n;
-    vector<int> v(n);
-    for (int i = 0; i < n; i++) {
-        cin >> v[i];
-    }
-    for (int i = 0; i < n; i++) {
-        if (hasExactlyThreeDivisors(v[i])) {
-            cout << "YES" << endl;
-        } else {
-            cout << "NO" << endl;
+int main(){
+    long long n;
+    cin>>n;
+    for(int i=0; i<n; i++){
+        long long num;
+        cin>>num;
+        double h=sqrt(num);
+        long long j=sqrt(num);
+        if(h!=j){
+            cout<<"NO"<<endl;
+            continue;
         }
+        if(isPrime(j)==true){
+            cout<<"YES"<<endl;
+        }
+        else cout<<"NO"<<endl;
     }
 }

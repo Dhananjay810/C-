@@ -17,8 +17,8 @@ void sub(string ans,string s,int idx,int n,vector<string>& s1){
     }
 }
 int main(){
-    string s="coaching";
-    string t="coding";
+    string s="121";
+    // string t="coding";
 
     vector<string> s1;
     int n=s.size();

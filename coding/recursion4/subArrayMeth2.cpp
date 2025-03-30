@@ -25,7 +25,7 @@ void subArray(vector<int>& nums,vector<int> v,int size,int idx,long long &k){
 }
 int main(){
     // MUST HAVE  UNIQUE ELLEMENTS
-    vector<int> nums={2,-2,-2,0,-2,2,2};
+    vector<int> nums={4,5,0,-2,-3,1};
     //sort(nums.begin(),nums.end());
     int n=nums.size();
     vector<int> v;

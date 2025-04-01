@@ -41,8 +41,8 @@ int main(){
     while(e--){
         int s,d;
         cin>>s>>d;
-        add_edge(s,d); // bidirected
-        // add_edge(s,d,false); // Directed
+        // add_edge(s,d); // bidirected
+        add_edge(s,d,false); // Directed
     }
     cout<<conn_comp();
 }

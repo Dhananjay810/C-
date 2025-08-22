@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Drone Control</title>
+</head>
+<body>
+  <h2>🎙️ Speak Command to Drone</h2>
+  <button onclick="startRecording()">Start Recording</button>
+  <button onclick="stopRecording()">Stop</button>
+
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://<YOUR_PI_IP>:5000");  // Replace with Raspberry Pi IP
+    let mediaRecorder;
+
+    async function startRecording() {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start(250); // send every 250ms
+
+      mediaRecorder.ondataavailable = e => {
+        if (e.data.size > 0) {
+          e.data.arrayBuffer().then(buffer => {
+            socket.emit('audio', new Int8Array(buffer));
+          });
+        }
+      };
+      console.log("Recording started...");
+    }
+
+    function stopRecording() {
+      if (mediaRecorder) {
+        mediaRecorder.stop();
+        console.log("Recording stopped.");
+      }
+    }
+  </script>
+</body>
+</html>

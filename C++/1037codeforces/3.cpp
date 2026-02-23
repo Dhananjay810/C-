@@ -1,48 +1,37 @@
 #include<iostream>
 #include<vector>
 #include<queue>
-#include<algorithm>
 #include<climits>
 using namespace std;
-
-int main() {
+int main(){
     int t;
-    cin >> t;
-    while (t--) {
-        int n, k;
-        cin >> n >> k;
-        vector<int> h(n);
-        for (int i = 0; i < n; i++) cin >> h[i];
-
-        int maxHeight = *max_element(h.begin(), h.end());
-        vector<int> time(n, INT_MAX);
-        queue<int> q;
-
-        // Start from tower (k-1) at time 0
-        time[k - 1] = 0;
-        q.push(k - 1);
-
-        while (!q.empty()) {
-            int curr = q.front(); q.pop();
-
-            for (int i = 0; i < n; i++) {
-                if (i == curr) continue;
-                int t_next = time[curr] + abs(h[i] - h[curr]);
-                if (t_next < h[i] && t_next < time[i]) {
-                    time[i] = t_next;
-                    q.push(i);
-                }
+    cin>>t;
+    while(t--){
+        int n,k;
+        cin>>n>>k;
+        vector<int> v(n);
+        for(int i=0; i<n; i++) cin>>v[i];
+        priority_queue<int,vector<int>, greater<int>> pq;
+        for(int i=0; i<n; i++){
+            if(v[i]>v[k-1]){
+                // cout<<v[i]<<" ";
+                pq.push(v[i]);
             }
         }
-
-        bool possible = false;
-        for (int i = 0; i < n; i++) {
-            if (h[i] == maxHeight && time[i] < h[i]) {
-                possible = true;
-                break;
-            }
+        int currwate=0;
+        int currheight=v[k-1];
+        while(pq.size()>0){
+            int u=pq.top();
+            pq.pop();
+            int diff=u-currheight;
+            int tim=currheight-currwate;
+            if(tim<diff) break;
+            else{
+                currwate+=diff;
+                currheight=u;
+            } 
         }
-
-        cout << (possible ? "YES" : "NO") << endl;
+        if(pq.size()==0) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
     }
 }

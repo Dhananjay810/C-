@@ -7,6 +7,7 @@ using namespace std;
 void fill(vector<bool>& flag){
     int n=flag.size()-1;
     for(int i=2; i<=sqrt(n); i++){
+        if(flag[i]==0) continue;
         for(int j=i*2; j<=n; j += i){
             flag[j]=0;
         }
@@ -24,7 +25,10 @@ int main(){
     flag[0]=0;
     flag[1]=0;
     for(int i=2; i<=n; i++){
-        if(flag[i]==1) count++;
+        if(flag[i]==1){
+            cout<<i<<" ";
+            count++;
+        }
     }
-    cout<<count;
+    // cout<<count;
 }

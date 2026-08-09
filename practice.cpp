@@ -1,27 +1,33 @@
 #include<iostream>
-#include<vector>
-#include<list>
 using namespace std;
-vector<list<int>> graph;
-void add(int src, int dest){
-    graph[src].push_back(dest);
-}
+
+class A{
+private:
+    void show(){
+        cout<<"A ka private"<<endl;
+    }
+
+protected:
+    void show1(){
+        cout<<"A ka protected"<<endl;
+    }
+
+public:
+    void show2(){
+        cout<<"A ka public"<<endl;
+    }
+};
+
+class B: private A{
+public:
+    void show(){
+        cout<<"a ka protected but B ka public"<<endl;
+    }
+};
+
 int main(){
-    int v;
-    cin>>v;
-    graph.resize(v,list<int>());
-    int e;
-    cin>>e;
-    while(e--){
-        int src,dest;
-        cin>>src>>dest;
-        add(src,dest);
-    }
-    vector<int> out(v,0);
-    for(int i=0; i<v; i++){
-        for(auto neig : graph[i]){
-            out[i]++;
-        }
-    }
-    for(int i=0; i<v; i++) cout<<i<<" "<<out[i]<<endl;
+
+    B b;
+    b.show();
+
 }

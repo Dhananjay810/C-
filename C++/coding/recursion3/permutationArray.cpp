@@ -2,7 +2,7 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-void per(vector<int>& nums,vector<int> ans){
+void per(vector<int>& nums,vector<int> &ans){
     if(nums.size()==0){
         for(int i=0; i<ans.size(); i++){
             cout<<ans[i]<<" ";
@@ -24,12 +24,12 @@ void per(vector<int>& nums,vector<int> ans){
         else{
             if(u!=nums[i-1]){
                 ans.push_back(nums[i]);
-            vector<int> m;
-            for(int j=0; j<nums.size(); j++){
-                if(j!=i) m.push_back(nums[j]);
-            }
-            per(m,ans);
-            ans.pop_back();
+                vector<int> m;
+                for(int j=0; j<nums.size(); j++){
+                    if(j!=i) m.push_back(nums[j]);
+                }
+                per(m,ans);
+                ans.pop_back();
             }
         }
     }
